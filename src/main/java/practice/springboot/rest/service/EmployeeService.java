@@ -15,12 +15,24 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository repository;
 
+	public void addEmployee(Employee emp) {
+		repository.save(emp);
+	}
+
 	public List<Employee> getAll() {
 		return repository.findAll();
 	}
 
 	public Employee getById(Long id) {
 		return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+	}
+
+	public void deleteEmployee(Long id) {
+		repository.deleteById(id);
+	}
+
+	public void deleteAll() {
+		repository.deleteAll();
 	}
 
 }
