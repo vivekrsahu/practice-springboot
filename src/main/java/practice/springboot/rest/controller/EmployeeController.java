@@ -1,8 +1,12 @@
 package practice.springboot.rest.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +39,10 @@ public class EmployeeController {
 	}
 
 	@GetMapping(value = "/api/v1/employee/getById/{id}", produces = "application/json")
-	public Employee getById(@PathVariable Long id) {
-		return service.getById(id);
+	public EntityModel<Employee> getById(@PathVariable Long id) {
+		Employee employee = service.getById(id);
+		return EntityModel.of(employee, linkTo(methodOn(EmployeeController.class).getById(id)).withSelfRel(),
+				linkTo(methodOn(EmployeeController.class).getAll()).withRel("employees"));
 	}
 
 	@DeleteMapping(value = "/api/v1/employee/deleteById/{id}")
