@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import practice.springboot.rest.model.Employee;
 import practice.springboot.rest.service.EmployeeService;
 
 @RestController
+@RequestMapping(value = "/api/v1/employee")
 public class EmployeeController {
 
 	@Autowired
@@ -24,27 +26,27 @@ public class EmployeeController {
 		return "Success";
 	}
 
-	@PostMapping(value = "/api/v1/employee/add", produces = "application/json")
+	@PostMapping(value = "/add", produces = "application/json")
 	public void addEmployee(@RequestBody Employee emp) {
 		service.addEmployee(emp);
 	}
 
-	@GetMapping(value = "/api/v1/employee/getAll", produces = "application/json")
+	@GetMapping(value = "/getAll", produces = "application/json")
 	public CollectionModel<EntityModel<Employee>> getAll() {
 		return service.getAll();
 	}
 
-	@GetMapping(value = "/api/v1/employee/getById/{id}", produces = "application/json")
+	@GetMapping(value = "/getById/{id}", produces = "application/json")
 	public EntityModel<Employee> getById(@PathVariable Long id) {
 		return service.getById(id);
 	}
 
-	@DeleteMapping(value = "/api/v1/employee/deleteById/{id}")
+	@DeleteMapping(value = "/deleteById/{id}")
 	public void deleteEmployee(@PathVariable Long id) {
 		service.deleteEmployee(id);
 	}
 
-	@DeleteMapping(value = "/api/v1/employee/deleteAll")
+	@DeleteMapping(value = "/deleteAll")
 	public void deleteAll() {
 		service.deleteAll();
 	}
