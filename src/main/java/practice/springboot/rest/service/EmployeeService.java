@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import practice.springboot.rest.controller.EmployeeController;
 import practice.springboot.rest.exception.EmployeeNotFoundException;
-import practice.springboot.rest.model.Employee;
+import practice.springboot.rest.entity.Employee;
 import practice.springboot.rest.repository.EmployeeRepository;
 import practice.springboot.rest.util.EmployeeModelAssembler;
 
@@ -42,7 +42,7 @@ public class EmployeeService {
 		return assembler.toModel(employee);
 	}
 
-	public void deleteEmployee(Long id) {
+	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
 

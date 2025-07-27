@@ -6,18 +6,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import practice.springboot.rest.model.Employee;
+import practice.springboot.rest.entity.Employee;
 
 @Configuration
 public class LoadDatabase {
 
-  private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LoadDatabase.class);
 
   @Bean
   CommandLineRunner initDatabase(EmployeeRepository repository) {
     return args -> {
-      log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
-      log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
+        LOGGER.info("Preloading {}", repository.save(new Employee("Bilbo Bagginess", "burglar")));
+        LOGGER.info("Preloading {}", repository.save(new Employee("Frodo Bagginess", "thief")));
     };
   }
 

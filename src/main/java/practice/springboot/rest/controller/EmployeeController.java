@@ -11,42 +11,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import practice.springboot.rest.model.Employee;
+import practice.springboot.rest.entity.Employee;
 import practice.springboot.rest.service.EmployeeService;
 
+import static practice.springboot.rest.constants.APIConstants.*;
+
 @RestController
-@RequestMapping(value = "/api/v1/employee")
+@RequestMapping(ROOT_PATH_EMPLOYEE)
 public class EmployeeController {
 
-	@Autowired
-	EmployeeService service;
+	private final EmployeeService service;
 
-	@GetMapping(value = "/ping")
+	@Autowired
+	public EmployeeController(EmployeeService service) {
+		this.service = service;
+	}
+
+	@GetMapping(PING)
 	public String checkHealth() {
 		return "Success";
 	}
 
-	@PostMapping(value = "/add", produces = "application/json")
+	@PostMapping(value = EMPLOYEE_ADD, produces = APPLICATION_JSON)
 	public void addEmployee(@RequestBody Employee emp) {
 		service.addEmployee(emp);
 	}
 
-	@GetMapping(value = "/getAll", produces = "application/json")
+	@GetMapping(value = EMPLOYEE_ALL, produces = APPLICATION_JSON)
 	public CollectionModel<EntityModel<Employee>> getAll() {
 		return service.getAll();
 	}
 
-	@GetMapping(value = "/getById/{id}", produces = "application/json")
+	@GetMapping(value = EMPLOYEE_BY_ID, produces = APPLICATION_JSON)
 	public EntityModel<Employee> getById(@PathVariable Long id) {
 		return service.getById(id);
 	}
 
-	@DeleteMapping(value = "/deleteById/{id}")
-	public void deleteEmployee(@PathVariable Long id) {
-		service.deleteEmployee(id);
+	@DeleteMapping(value = EMPLOYEE_BY_ID)
+	public void deleteById(@PathVariable Long id) {
+		service.deleteById(id);
 	}
 
-	@DeleteMapping(value = "/deleteAll")
+	@DeleteMapping(value = EMPLOYEE_ALL)
 	public void deleteAll() {
 		service.deleteAll();
 	}
