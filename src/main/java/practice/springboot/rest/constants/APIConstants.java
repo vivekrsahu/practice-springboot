@@ -15,7 +15,6 @@ public final class APIConstants {
     public static final String ROOT_PATH_EMPLOYEE = API_PREFIX + API_VERSION + API_BASE_EMPLOYEE;
 
     // Endpoint Constants
-    public static final String PING = "/ping";
     public static final String EMPLOYEE_ADD = "/add";
     public static final String EMPLOYEE_ALL = "/all";
     public static final String EMPLOYEE_BY_ID = "/id/{id}";
